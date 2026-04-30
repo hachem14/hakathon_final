@@ -1,0 +1,76 @@
+╔══════════════════════════════════════════════════════════════╗
+║           MEDSAFE — GUIDE DE COMPILATION (.EXE)             ║
+╚══════════════════════════════════════════════════════════════╝
+
+━━━ STRUCTURE DU DOSSIER REQUIS ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  medsafe/
+  ├── dashboard_medecin.py
+  ├── dashboard_medecin.spec
+  ├── dashboard_pharmacien.py
+  ├── dashboard_pharmacien.spec
+  ├── setup_db.py
+  ├── medecin_panel.py
+  ├── mokkt.jpg                  ← logo MEDSAFE
+  └── medsafe_cabinet.db         ← base de données (créée par setup_db.py)
+
+IMPORTANT : Tous ces fichiers doivent être dans le MÊME dossier.
+
+━━━ ÉTAPE 1 — INSTALLER LES DÉPENDANCES ━━━━━━━━━━━━━━━━━━━━━
+
+Ouvre un terminal (cmd ou PowerShell) dans le dossier du projet et tape :
+
+  pip install customtkinter pillow pyinstaller
+
+━━━ ÉTAPE 2 — CRÉER LA BASE DE DONNÉES ━━━━━━━━━━━━━━━━━━━━━━
+
+  python setup_db.py
+
+  → Cela crée le fichier medsafe_cabinet.db avec un médecin de test :
+      Email    : admin@medsafe.dz
+      Password : admin123
+
+━━━ ÉTAPE 3 — COMPILER LES .EXE ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Pour le dashboard Médecin :
+  pyinstaller dashboard_medecin.spec
+
+Pour le dashboard Pharmacien :
+  pyinstaller dashboard_pharmacien.spec
+
+━━━ ÉTAPE 4 — RÉCUPÉRER LES .EXE ━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Les exécutables se trouvent dans :
+  dist/MedSafe_Medecin.exe
+  dist/MedSafe_Pharmacien.exe
+
+⚠️  IMPORTANT après compilation :
+La base de données medsafe_cabinet.db est copiée DANS le .exe au moment
+de la compilation. Si l'utilisateur s'inscrit dans le .exe, les données
+sont sauvegardées dans le MÊME dossier que le .exe (pas dans dist/).
+
+Pour distribuer l'application :
+  1. Copie MedSafe_Medecin.exe dans un dossier propre
+  2. Lance-le une première fois → il crée medsafe_cabinet.db à côté
+  3. Ou copie ta medsafe_cabinet.db existante à côté du .exe
+
+━━━ COMPTE DE TEST ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Médecin  → Email : admin@medsafe.dz    | MDP : admin123
+  Pharmacie → Créer un compte depuis l'interface
+
+━━━ EN CAS D'ERREUR ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Si erreur "No module named 'customtkinter'" :
+    pip install customtkinter
+
+  Si erreur PIL/Pillow :
+    pip install pillow
+
+  Si le .exe ne trouve pas la DB :
+    Vérifie que medsafe_cabinet.db est dans le même dossier que le .exe
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                        MEDSAFE © 2026
+                 Pour des médicaments sûrs / لأدوية آمنة
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

@@ -1,0 +1,5 @@
+.venv/
+*.zip
+*.safetensors
+__pycache__/
+*.pyc
